@@ -1,0 +1,56 @@
+.formulario-invitados {
+	text-align: left !important;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif !important;
+}
+
+.formulario-invitados label {
+	font-weight: 600;
+	font-size: 20px;
+	font-family: "Poiret One", cursive;
+}
+
+.form-check-input {
+	width: 1.2em;
+	height: 1.2em;
+	margin-top: 0.25em;
+	vertical-align: top;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-print-color-adjust: exact;
+	color-adjust: exact;
+}
+
+.invitado {
+	margin-left: 10px;
+	border: 1px solid #cfb53b;
+	padding: 10px;
+}
+
+.btn-rsvp {
+	text-transform: uppercase;
+	padding: 10px;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.btn-rsvp:hover {
+	text-transform: uppercase;
+	padding: 10px;
+	border: 1px solid #cfb53b;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	font-weight: 700;
+	cursor: pointer;
+	background-color: #cfb53b;
+	color: #fff;
+}
