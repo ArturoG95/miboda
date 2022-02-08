@@ -12,12 +12,23 @@ export const Formulario = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (invitado !== "" && confirmados > 0) {
-			console.log(invitado.value, invitado.invitados, confirmados, rsvpRomance);
+		if (invitado !== "") {
+			if (
+				parseInt(confirmados) <= invitado.invitados &&
+				parseInt(confirmados) > 0
+			) {
+				// console.log(
+				// 	invitado.value,
+				// 	invitado.invitados,
+				// 	confirmados,
+				// 	rsvpRomance
+				// );
+				alert("Gracias por tu confirmacion.");
+			} else {
+				alert("Favor de colocar la cantidad correcta.");
+			}
 		} else {
-			alert(
-				"Favor de seleccionar tu nombre o registar correctamente las personas confirmadas"
-			);
+			alert("Favor de buscar y seleccionar tu Nombre.");
 		}
 	};
 
