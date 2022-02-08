@@ -13,14 +13,21 @@ export const Formulario = () => {
 		e.preventDefault();
 		if (invitado !== "") {
 			console.log(invitado.value, invitado.invitados, rsvpRomance);
+		} else {
+			alert("Favor de seleccionar tu nombre");
 		}
-		alert("Favor de seleccionar tu nombre");
 	};
 
 	const handleChange = (option) => {
-		setInvitado(option);
-		setMostarCantidadDeInvitados(true);
-		setInvitadosDeInvidato(option.invitados);
+		if (option !== null) {
+			setInvitado(option);
+			setMostarCantidadDeInvitados(true);
+			setInvitadosDeInvidato(option.invitados);
+		} else {
+			setInvitado("");
+			setMostarCantidadDeInvitados(false);
+			setInvitadosDeInvidato("");
+		}
 	};
 
 	const options = [
@@ -66,9 +73,16 @@ export const Formulario = () => {
 				{mostrarCantidadDeInvitados && (
 					<>
 						<div>
-							<label>Cantidad de Invitados:</label>
+							<label>Cantidad de Personas:</label>
 							<span className="invitado">
 								{invitadosDeInvitado !== "" && invitadosDeInvitado}
+							</span>
+						</div>
+						<br />
+						<div>
+							<label>Personas Confirmadas:</label>
+							<span className="invitado-confirmado">
+								<input type="number" min="1" max={invitado.invitados} />
 							</span>
 						</div>
 						<br />

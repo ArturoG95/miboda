@@ -33,6 +33,11 @@
 	padding: 10px;
 }
 
+.invitado-confirmado {
+	margin-left: 10px;
+	padding: 10px;
+}
+
 .btn-rsvp {
 	text-transform: uppercase;
 	padding: 10px;
