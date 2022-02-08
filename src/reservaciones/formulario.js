@@ -8,13 +8,16 @@ export const Formulario = () => {
 		useState(false);
 	const [invitadosDeInvitado, setInvitadosDeInvidato] = useState("");
 	const [rsvpRomance, setRsvpRomance] = useState(false);
+	const [confirmados, setConfirmados] = useState(0);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (invitado !== "") {
-			console.log(invitado.value, invitado.invitados, rsvpRomance);
+		if (invitado !== "" && confirmados > 0) {
+			console.log(invitado.value, invitado.invitados, confirmados, rsvpRomance);
 		} else {
-			alert("Favor de seleccionar tu nombre");
+			alert(
+				"Favor de seleccionar tu nombre o registar correctamente las personas confirmadas"
+			);
 		}
 	};
 
@@ -27,6 +30,7 @@ export const Formulario = () => {
 			setInvitado("");
 			setMostarCantidadDeInvitados(false);
 			setInvitadosDeInvidato("");
+			setConfirmados(0);
 		}
 	};
 
@@ -82,7 +86,12 @@ export const Formulario = () => {
 						<div>
 							<label>Personas Confirmadas:</label>
 							<span className="invitado-confirmado">
-								<input type="number" min="1" max={invitado.invitados} />
+								<input
+									type="number"
+									min="0"
+									max={invitado.invitados}
+									onChange={(e) => setConfirmados(e.target.value)}
+								/>
 							</span>
 						</div>
 						<br />
