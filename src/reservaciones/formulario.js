@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select-virtualized";
+import {
+	fetchRequest,
+	fetchRequestWithFormData,
+} from "../helpers/fetchRequest";
 import "./form.css";
 
 export const Formulario = () => {
@@ -9,21 +13,42 @@ export const Formulario = () => {
 	const [invitadosDeInvitado, setInvitadosDeInvidato] = useState("");
 	const [rsvpRomance, setRsvpRomance] = useState(false);
 	const [confirmados, setConfirmados] = useState(0);
+	const [options, setOptions] = useState([]);
+
+	useEffect(() => {
+		getInvitados();
+	}, []);
+
+	const getInvitados = async () => {
+		const resp = await fetchRequest("guests", "GET");
+		const body = await resp.json();
+		setOptions(
+			body.invitados.map((invitado) => ({
+				label: invitado.invitado,
+				value: invitado.cantidadPersonas,
+				key: invitado._id,
+				rsvp: invitado.rsvpRomance,
+				confirmadas: invitado.personasConfirmadas,
+			}))
+		);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		if (invitado !== "") {
 			if (
-				parseInt(confirmados) <= invitado.invitados &&
+				parseInt(confirmados) <= invitado.value &&
 				parseInt(confirmados) > 0
 			) {
-				// console.log(
-				// 	invitado.value,
-				// 	invitado.invitados,
-				// 	confirmados,
-				// 	rsvpRomance
-				// );
-				alert("Gracias por tu confirmacion.");
+				let confirmacion = {
+					personasConfirmadas: parseInt(confirmados),
+					rsvpRomance,
+					confirmado: true,
+					_id: invitado.key,
+				};
+
+				enviarConfirmacion(confirmacion);
 			} else {
 				alert("Favor de colocar la cantidad correcta.");
 			}
@@ -32,46 +57,35 @@ export const Formulario = () => {
 		}
 	};
 
+	const enviarConfirmacion = async (confirmacion) => {
+		const resp = await fetchRequest(`update-confirmation`, confirmacion, "PUT");
+		const body = await resp.json();
+		if (body.ok) {
+			alert(`Gracias por tu confirmacion, ${invitado.label}`);
+			setInvitado("");
+			setMostarCantidadDeInvitados(false);
+			setInvitadosDeInvidato("");
+			setConfirmados(0);
+			setRsvpRomance(false);
+		} else {
+			alert(`Hablar con el Adminsitrador`);
+		}
+	};
 	const handleChange = (option) => {
 		if (option !== null) {
 			setInvitado(option);
 			setMostarCantidadDeInvitados(true);
-			setInvitadosDeInvidato(option.invitados);
+			setInvitadosDeInvidato(option.value);
+			setConfirmados(option.confirmadas);
+			setRsvpRomance(option.rsvp);
 		} else {
 			setInvitado("");
 			setMostarCantidadDeInvitados(false);
 			setInvitadosDeInvidato("");
 			setConfirmados(0);
+			setRsvpRomance(false);
 		}
 	};
-
-	const options = [
-		{
-			value: 1,
-			label: `guiyep`,
-			invitados: 3,
-		},
-		{
-			value: 2,
-			label: `2guiyep`,
-			invitados: 4,
-		},
-		{
-			value: 3,
-			label: `3guiyep`,
-			invitados: 6,
-		},
-		{
-			value: 4,
-			label: `4guiyep`,
-			invitados: 5,
-		},
-		{
-			value: 5,
-			label: `5guiyep`,
-			invitados: 7,
-		},
-	];
 
 	return (
 		<>
@@ -100,7 +114,8 @@ export const Formulario = () => {
 								<input
 									type="number"
 									min="0"
-									max={invitado.invitados}
+									max={invitado.value}
+									value={confirmados ? confirmados : 0}
 									onChange={(e) => setConfirmados(e.target.value)}
 								/>
 							</span>
@@ -116,6 +131,7 @@ export const Formulario = () => {
 					<input
 						type="checkbox"
 						className="form-check-input"
+						checked={invitado.rsvp ? true : false}
 						onChange={() => {
 							setRsvpRomance(!rsvpRomance);
 						}}

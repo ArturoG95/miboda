@@ -70,14 +70,17 @@ function App() {
 						<p>
 							<b>No. Evento 50814933</b>
 						</p>
-						<img src="./img/liverpool.png" alt="" />
+						<img
+							src="./img/liverpool.png"
+							alt="no-evento-mesa-regalos-liverpool"
+						/>
 					</div>
 					<div className="mesa-amazon">
 						<a
-							href="https://www.amazon.com.mx/wedding/home?ref_=wr_cr_np_s"
+							href="https://www.amazon.com.mx/wedding/arturo-garcia-fuentes-leslie-cecilia-rivera-ravelo-monterrey-august-2022/registry/3JXHNK4XTDB7L"
 							target="blank"
 						>
-							<img src="./img/amazon.png" alt="" />
+							<img src="./img/amazon.png" alt="link-mesa-regalos-amazon" />
 						</a>
 					</div>
 					<hr />
