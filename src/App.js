@@ -1,5 +1,11 @@
 import "./App.css";
 import { Formulario } from "./reservaciones/formulario";
+import playa from "./img/playa.png";
+import capilla from "./img/capilla.png";
+import logoP from "./img/logo_pinterest.png";
+import liverpool from "./img/liverpool.png";
+import amazon from "./img/amazon.png";
+
 function App() {
 	return (
 		<>
@@ -11,13 +17,13 @@ function App() {
 						<h4>Ceremonia Religiosa</h4>
 						<p>Capilla Nuestra Señora de Guadalupe</p>
 						<p>5:00pm</p>
-						<img src="./img/capilla.png" className="capilla-img" />
+						<img src={capilla} className="capilla-img" />
 					</div>
 					<div className="playa-container">
 						<h4>Recepción</h4>
 						<p>Playa del hotel | Por definir</p>
 						<p>8:00pm</p>
-						<img src="./img/playa.png" className="playa-img" />
+						<img src={playa} className="playa-img" />
 					</div>
 					{/* <!-- DONDE --> */}
 					<hr />
@@ -40,7 +46,7 @@ function App() {
 							<p>Ejemplos de vestimenta:</p>
 							<a href="https://pin.it/2QlVnSy" target="blank">
 								<img
-									src="./img/logo_pinterest.png"
+									src={logoP}
 									width="40"
 									height="40"
 									className="logo-pinterest"
@@ -70,17 +76,14 @@ function App() {
 						<p>
 							<b>No. Evento 50814933</b>
 						</p>
-						<img
-							src="./img/liverpool.png"
-							alt="no-evento-mesa-regalos-liverpool"
-						/>
+						<img src={liverpool} alt="no-evento-mesa-regalos-liverpool" />
 					</div>
 					<div className="mesa-amazon">
 						<a
 							href="https://www.amazon.com.mx/wedding/arturo-garcia-fuentes-leslie-cecilia-rivera-ravelo-monterrey-august-2022/registry/3JXHNK4XTDB7L"
 							target="blank"
 						>
-							<img src="./img/amazon.png" alt="link-mesa-regalos-amazon" />
+							<img src={amazon} alt="link-mesa-regalos-amazon" />
 						</a>
 					</div>
 					<hr />
